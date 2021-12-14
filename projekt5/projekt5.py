@@ -11,7 +11,7 @@ from bokeh.plotting import figure
 from bokeh.transform import cumsum
 
 output_notebook()
-############################################## DANE #################
+################################# DANE #################
 dogs = {
     'United States': 70,
     'Brazil': 35.8,
@@ -28,7 +28,7 @@ x = np.linspace(-20 * np.pi, 20 * np.pi, 5000)
 y_sin = np.sin(x)
 y_cos = np.cos(x)
 data_sin = {'x': x, 'y_sin': y_sin, 'y_cos': y_cos}
-########################################## WYKRES I #################
+################################# WYKRES I #################
 data = pd.Series(dogs).reset_index(name='value').rename(columns={'index': 'country'})
 data['angle'] = data['value'] / data['value'].sum() * 2 * 3.14
 data['color'] = Set3[len(dogs)]
@@ -49,13 +49,13 @@ fig1.axis.visible = False
 fig1.grid.grid_line_color = None
 # show(fig1)
 
-########################################## WYKRES II #################
+################################# WYKRES II #################
 fig2 = figure(title="Sinus", x_axis_label='x', y_axis_label='y', x_range=(-np.pi, np.pi))
 fig2.circle(x, y_sin)
 fig2.line(x, y_sin, color='red')
 # show(fig2)
 
-########################################## WYKRES III #################
+################################# WYKRES III #################
 dogs_list = [(country_name, numer_dogs) for country_name, numer_dogs in dogs.items()]
 dogs_array = np.asarray(dogs_list)
 dogs_t1, dogs_t2 = [], []
@@ -69,7 +69,7 @@ fig3.segment(x0=0, y0=dogs_t1, x1=dogs_t2, y1=dogs_t1, line_color="#f4a582", lin
 fig3.circle(x=dogs_t2, y=dogs_t1, size=8, line_color="#f4a582", fill_color="white", line_width=4)
 # show(fig3)
 
-########################################## WYKRES IV #################
+################################# WYKRES IV #################
 fig4 = figure(x_range=dogs_t1, title="Countries with the most dogs wordwide (milion)", width=600, height=800)
 fig4.vbar(x=dogs_t1, top=dogs_t2, width=0.5, line_color="black", fill_color="#f4a582")
 fig4.y_range.start = 0
