@@ -31,7 +31,6 @@ def check_time(func):
             end = timer()
             diff_time.append(end - start)
             console.log(f'Time of one execution : {diff_time} s')
-        # return func(*args, **kwargs)
 
     return wrapper
 
@@ -42,5 +41,5 @@ def function(**kwargs):
     console.print("Nice decorator")
 
 
-function(n=10)
+function(n=5)
 # function()
