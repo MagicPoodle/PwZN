@@ -30,7 +30,8 @@ def check_time(func):
             func(*args, **kwargs)
             end = timer()
             diff_time.append(end - start)
-            console.log(f'Time of one execution : {diff_time} s')
+            colour = 'red'
+            console.log(f'[{colour}]Time of one execution :[/{colour}] {diff_time} s')
 
     return wrapper
 
