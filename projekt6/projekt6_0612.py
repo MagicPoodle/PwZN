@@ -37,5 +37,5 @@ def function(*args):
     calculate = x*y/np.pi
     return console.print(f'[bold]Result :[/bold] \n {calculate}')
 
-
-decorator(4)(function)(8)
+decorator()(function)(8)
+#decorator(4)(function)(8)
