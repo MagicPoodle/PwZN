@@ -1,7 +1,6 @@
 from rich.console import Console
 import rich.traceback
 from timeit import default_timer as timer
-from time import sleep
 import numpy as np
 import functools
 
@@ -12,35 +11,31 @@ rich.traceback.install()
 diff_time = []
 
 
-def check_time(func):
-    @functools.wraps(func)
-    def wrapper(*args, **kwargs):
-        if 'n' in kwargs:
-            for replay in range(kwargs.get('n')):
+def decorator(a=1):
+    def check_time(func):
+        @functools.wraps(func)
+        def wrapper(*args, **kwargs):
+            for replay in range(a):
                 start = timer()
                 func(*args, **kwargs)
                 end = timer()
-                diff_time.append(end - start)
+                diff_time.append(end-start)
             colour = 'red'
-            console.log(f"[{colour}]The number of executions : [/{colour}]{kwargs.get('n')}")
+            console.log(f"[{colour}]\nThe number of elements : [/{colour}]{a}")
             console.log(f'[{colour}]Time of one execution : [/{colour}]{diff_time} s')
             console.log(f'[{colour}]Mean time of all executions : [/{colour}]{np.mean(diff_time)} s')
-        else:
-            start = timer()
-            func(*args, **kwargs)
-            end = timer()
-            diff_time.append(end - start)
-            colour = 'red'
-            console.log(f'[{colour}]Time of one execution :[/{colour}] {diff_time} s')
 
-    return wrapper
+        return wrapper
+    return check_time
 
 
-@check_time
-def function(**kwargs):
-    sleep(np.random.randint(0, 2))
-    console.print("Nice decorator")
+def function(*args):
+    n = args[0]
+    b = np.random.randint(n, n*2)
+    x = np.linspace(1, b * 2, n)
+    y = np.linspace(1, b*3, n)
+    calculate = x*y/np.pi
+    return console.print(f'[bold]Result :[/bold] \n {calculate}')
 
 
-function(n=5)
-# function()
+decorator(4)(function)(8)
